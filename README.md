@@ -23,8 +23,8 @@ El ZXHN F680 V6 usa el mismo SoC (ZX279128), así que gran parte del trabajo le 
 ## Estado de la primera alfa
 
 Kernel **Linux 6.18.57 LTS** propio más userspace **OpenWrt 25.12.5**, armado con `apk` a partir de los
-paquetes oficiales `arm_fa526` y cargado como initramfs. Por ahora arranca por TFTP desde U-Boot; la grabación
-en el banco 1 de la flash está preparada, y el banco 0 conserva el firmware de fábrica como red de seguridad.
+paquetes oficiales `arm_fa526` y cargado como initramfs. **Grabada en el banco 1 de la flash** y validada con cortes
+de energía reales (arranca sola, LuCI en ~40–55 s); el banco 0 conserva el firmware de fábrica como red de seguridad.
 
 | Componente | Estado |
 |---|---|
@@ -36,14 +36,15 @@ en el banco 1 de la flash está preparada, y el banco 0 conserva el firmware de 
 | Firewall (firewall4/nftables), NAT, DHCP/DNS (dnsmasq), LuCI | ✅ |
 | WAN PPPoE (VLAN 10) | ✅ configurado, ⏳ sin probar con un proveedor real |
 | Segundo núcleo (SMP) | ⚠️ funciona, pero se congela de forma intermitente cuando el WiFi por PCIe trabaja en paralelo con CPU1. La alfa arranca con `maxcpus=1` mientras se investiga |
-| GPON (MAC, PLOAM/ranging, óptica, OMCI, GEM/T-CONT) | 🚧 ingeniería inversa terminada en buena parte; drivers en desarrollo |
+| GPON (MAC, PLOAM/ranging, óptica, OMCI, GEM/T-CONT) | 🚧 drivers propios del MAC GPON, GPIO e I²C escritos; SerDes PON enganchada y doble cierre del láser verificados sin fibra; primera prueba con OLT real pendiente |
 | USB 3 (DWC3) | ❌ todavía no |
 | Telefonía FXS (SLIC + DSP + RTP) | ❌ todavía no |
 
 Hitos de estabilidad ya validados en hardware, con campañas automáticas de arranque y cortes de energía reales:
 
 - 10 de 10 arranques limpios con un núcleo.
-- Prueba de 30 min: 0 % de pérdida de ping.
+- Prueba de 30 min: 0 % de pérdida de ping, 1.329 descargas de 8 MiB verificadas por hash (~25 MB/s).
+- Arranque desde flash tras cortes de energía reales, con LuCI completo (incluido firewall).
 - DHCP, y ARP hacia hosts inexistentes, sin trabar la recepción.
 - Tráfico TCP sostenido sin tormentas de interrupciones.
 
