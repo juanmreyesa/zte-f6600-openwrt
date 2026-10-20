@@ -1,4 +1,4 @@
-# zte-f6600-libre
+# zte-f6600-openwrt
 
 **English** · [Español](#español)
 
@@ -104,7 +104,7 @@ No vendor binaries, firmware images or calibration data are distributed.
 
 # Español
 
-[English](#zte-f6600-libre) · **Español**
+[English](#zte-f6600-openwrt) · **Español**
 
 Firmware de código abierto para el **ZTE ZXHN F6600**, un ONT GPON con WiFi 6, y otros equipos con el mismo SoC:
 Linux mainline, OpenWrt y drivers escritos para el proyecto. No usa módulos de kernel ni programas del fabricante;
